@@ -150,8 +150,10 @@ class Receive
      */
     private function createCallbackLogEntry($data)
     {
+        $time = new DateTime();
+        $time->setTimestamp(bcdiv($data['calledAt'], 1000, 0));
         return new CallbackLogEntry($data['callback'],
-                                    new DateTime($data['calledAt']),
+                                    $time,
                                     $data['rawResponse'],
                                     $data['responseCode']);
     }
